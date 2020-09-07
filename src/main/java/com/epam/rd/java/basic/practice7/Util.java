@@ -17,17 +17,17 @@ import java.io.File;
 
 public final class Util {
 
+    private static final DocumentBuilderFactory DOCUMENT_BUILDER_FACTORY = DocumentBuilderFactory.newInstance();
+
     private Util() {
     }
 
     public static Document getDocument(People people) throws ParserConfigurationException {
 
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-        documentBuilderFactory.setNamespaceAware(true);
+        DOCUMENT_BUILDER_FACTORY.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        DOCUMENT_BUILDER_FACTORY.setNamespaceAware(true);
 
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        DocumentBuilder documentBuilder = DOCUMENT_BUILDER_FACTORY.newDocumentBuilder();
         Document document = documentBuilder.newDocument();
 
         // container is people

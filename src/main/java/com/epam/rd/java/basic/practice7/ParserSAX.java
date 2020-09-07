@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class ParserSAX extends DefaultHandler {
 
+    private static final SAXParserFactory SAX_PARSER_FACTORY = SAXParserFactory.newInstance();
     private final String inputXmlFile;
     private People people;
     private Man man;
@@ -25,18 +26,15 @@ public class ParserSAX extends DefaultHandler {
 
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
 
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-
-        factory.setNamespaceAware(true);
+        SAX_PARSER_FACTORY.setNamespaceAware(true);
 
         if (validate) {
-            factory.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
-            factory.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+            SAX_PARSER_FACTORY.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+            SAX_PARSER_FACTORY.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         }
 
-        SAXParser parser = factory.newSAXParser();
+        SAXParser parser = SAX_PARSER_FACTORY.newSAXParser();
         parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
         parser.parse(inputXmlFile, this);
 
     }

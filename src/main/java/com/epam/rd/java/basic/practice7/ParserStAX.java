@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class ParserStAX {
 
+    private static final XMLInputFactory XML_INPUT_FACTORY = XMLInputFactory.newInstance();
     private final String inputXmlFile;
     private People people;
     private Man man;
@@ -23,12 +24,10 @@ public class ParserStAX {
 
         String currentElement = null;
 
-        XMLInputFactory factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
+        XML_INPUT_FACTORY.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        XML_INPUT_FACTORY.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
 
-        XMLEventReader reader = factory.createXMLEventReader(new StreamSource(inputXmlFile));
+        XMLEventReader reader = XML_INPUT_FACTORY.createXMLEventReader(new StreamSource(inputXmlFile));
 
         while (reader.hasNext()) {
             XMLEvent event = reader.nextEvent();

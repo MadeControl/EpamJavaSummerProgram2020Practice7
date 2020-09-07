@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class ParserDOM {
 
+    private static final DocumentBuilderFactory DOCUMENT_BUILDER_FACTORY = DocumentBuilderFactory.newInstance();
     private final String inputXmlFile;
     private People people;
 
@@ -22,17 +23,15 @@ public class ParserDOM {
 
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
 
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-        documentBuilderFactory.setNamespaceAware(true);
+        DOCUMENT_BUILDER_FACTORY.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        DOCUMENT_BUILDER_FACTORY.setNamespaceAware(true);
 
         if (validate) {
-            documentBuilderFactory.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
-            documentBuilderFactory.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+            DOCUMENT_BUILDER_FACTORY.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+            DOCUMENT_BUILDER_FACTORY.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         }
 
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        DocumentBuilder documentBuilder = DOCUMENT_BUILDER_FACTORY.newDocumentBuilder();
         documentBuilder.setErrorHandler(new DefaultHandler() {
             @Override
             public void error(SAXParseException e) throws SAXException {

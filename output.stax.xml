@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <People>
-    <Man>
-        <Name>Danya</Name>
-        <Surname>Polishchuk</Surname>
-        <Age>19</Age>
-        <Money>
-            <Currency>USD</Currency>
-            <Amount>1000.0</Amount>
-        </Money>
-    </Man>
-    <Man>
-        <Name>Pasha</Name>
-        <Surname>Drovnin</Surname>
-        <Age>18</Age>
-        <Money>
-            <Currency>USD</Currency>
-            <Amount>2000.0</Amount>
-        </Money>
-    </Man>
-    <Man>
-        <Name>Ivan</Name>
-        <Surname>Veriovochkin</Surname>
-        <Age>19</Age>
-        <Money>
-            <Currency>USD</Currency>
-            <Amount>3000.0</Amount>
-        </Money>
-    </Man>
+<Man>
+<Name>Danya</Name>
+<Surname>Polishchuk</Surname>
+<Age>19</Age>
+<Money>
+<Currency>USD</Currency>
+<Amount>1000.0</Amount>
+</Money>
+</Man>
+<Man>
+<Name>Pasha</Name>
+<Surname>Drovnin</Surname>
+<Age>18</Age>
+<Money>
+<Currency>USD</Currency>
+<Amount>2000.0</Amount>
+</Money>
+</Man>
+<Man>
+<Name>Ivan</Name>
+<Surname>Veriovochkin</Surname>
+<Age>19</Age>
+<Money>
+<Currency>USD</Currency>
+<Amount>3000.0</Amount>
+</Money>
+</Man>
 </People>

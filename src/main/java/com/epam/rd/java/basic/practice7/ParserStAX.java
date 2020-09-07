@@ -1,5 +1,6 @@
 package com.epam.rd.java.basic.practice7;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -11,6 +12,8 @@ public class ParserStAX {
 
     private final String inputXmlFile;
     private People people;
+    private Man man;
+    private Money money;
 
     public ParserStAX(String inputXmlFile) {
         this.inputXmlFile = inputXmlFile;
@@ -18,12 +21,11 @@ public class ParserStAX {
 
     public void parse() throws XMLStreamException {
 
-        Man man = null;
-        Money money = null;
-
         String currentElement = null;
 
         XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
         factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
 
         XMLEventReader reader = factory.createXMLEventReader(new StreamSource(inputXmlFile));
@@ -39,50 +41,13 @@ public class ParserStAX {
                 StartElement startElement = event.asStartElement();
                 currentElement = startElement.getName().getLocalPart();
 
-                if (Constants.XML_PEOPLE.equals(currentElement)) {
-                    people = new People();
-                    continue;
-                }
-
-                if (Constants.XML_MAN.equals(currentElement)) {
-                    man = new Man();
-                    continue;
-                }
-
-                if (Constants.XML_MAN_MONEY.equals(currentElement)) {
-                    money = new Money();
-                    Objects.requireNonNull(man).setMoney(money);
-                    continue;
-                }
+                methodForStartElement(currentElement);
             }
 
             if (event.isCharacters()) {
                 Characters characters = event.asCharacters();
 
-                if (Constants.XML_MAN_NAME.equals(currentElement)) {
-                    Objects.requireNonNull(man).setName(characters.getData());
-                    continue;
-                }
-
-                if (Constants.XML_MAN_SURNAME.equals(currentElement)) {
-                    Objects.requireNonNull(man).setSurname(characters.getData());
-                    continue;
-                }
-
-                if (Constants.XML_MAN_AGE.equals(currentElement)) {
-                    Objects.requireNonNull(man).setAge(Long.parseLong(characters.getData()));
-                    continue;
-                }
-
-                if (Constants.XML_MONEY_CURRENCY.equals(currentElement)) {
-                    Objects.requireNonNull(money).setCurrency(characters.getData());
-                    continue;
-                }
-
-                if (Constants.XML_MONEY_AMOUNT.equals(currentElement)) {
-                    Objects.requireNonNull(money).setAmount(Double.parseDouble(characters.getData()));
-                    continue;
-                }
+                methodForCharacters(currentElement, characters);
             }
 
             if (event.isEndElement()) {
@@ -99,5 +64,52 @@ public class ParserStAX {
 
     public People getPeople() {
         return people;
+    }
+
+    private void methodForStartElement(String currentElement) {
+
+        if (Constants.XML_PEOPLE.equals(currentElement)) {
+            people = new People();
+            return;
+        }
+
+        if (Constants.XML_MAN.equals(currentElement)) {
+            man = new Man();
+            return;
+        }
+
+        if (Constants.XML_MAN_MONEY.equals(currentElement)) {
+            money = new Money();
+            Objects.requireNonNull(man).setMoney(money);
+        }
+
+    }
+
+    private void methodForCharacters(String currentElement, Characters characters) {
+
+        if (Constants.XML_MAN_NAME.equals(currentElement)) {
+            Objects.requireNonNull(man).setName(characters.getData());
+            return;
+        }
+
+        if (Constants.XML_MAN_SURNAME.equals(currentElement)) {
+            Objects.requireNonNull(man).setSurname(characters.getData());
+            return;
+        }
+
+        if (Constants.XML_MAN_AGE.equals(currentElement)) {
+            Objects.requireNonNull(man).setAge(Long.parseLong(characters.getData()));
+            return;
+        }
+
+        if (Constants.XML_MONEY_CURRENCY.equals(currentElement)) {
+            Objects.requireNonNull(money).setCurrency(characters.getData());
+            return;
+        }
+
+        if (Constants.XML_MONEY_AMOUNT.equals(currentElement)) {
+            Objects.requireNonNull(money).setAmount(Double.parseDouble(characters.getData()));
+        }
+
     }
 }

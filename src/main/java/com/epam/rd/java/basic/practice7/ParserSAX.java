@@ -4,7 +4,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
-
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -26,6 +26,7 @@ public class ParserSAX extends DefaultHandler {
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
+
         factory.setNamespaceAware(true);
 
         if (validate) {
@@ -34,6 +35,8 @@ public class ParserSAX extends DefaultHandler {
         }
 
         SAXParser parser = factory.newSAXParser();
+        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
         parser.parse(inputXmlFile, this);
 
     }

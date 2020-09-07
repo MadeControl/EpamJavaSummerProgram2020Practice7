@@ -2,6 +2,9 @@ package com.epam.rd.java.basic.practice7;
 
 public class Constants {
 
+    private Constants() {
+    }
+
     // XML tags
     public static final String XML_PEOPLE = "People";
     public static final String XML_MAN = "Man";

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public final class Main {
 
-    private final static Logger LOGGER = Logger.getLogger(Main.class.getSimpleName());
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getSimpleName());
 
     public static void main(final String[] args) throws TransformerException, ParserConfigurationException {
 

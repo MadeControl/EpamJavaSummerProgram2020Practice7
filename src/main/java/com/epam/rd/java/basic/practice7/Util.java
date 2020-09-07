@@ -3,6 +3,7 @@ package com.epam.rd.java.basic.practice7;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -84,8 +85,9 @@ public final class Util {
         StreamResult result = new StreamResult(new File(xmlFileName));
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
+        transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
+        Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         transformer.transform(new DOMSource(document), result);

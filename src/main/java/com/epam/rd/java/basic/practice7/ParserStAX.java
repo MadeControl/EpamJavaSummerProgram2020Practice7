@@ -5,6 +5,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.*;
 import javax.xml.transform.stream.StreamSource;
+import java.util.Objects;
 
 public class ParserStAX {
 
@@ -50,7 +51,7 @@ public class ParserStAX {
 
                 if (Constants.XML_MAN_MONEY.equals(currentElement)) {
                     money = new Money();
-                    man.setMoney(money);
+                    Objects.requireNonNull(man).setMoney(money);
                     continue;
                 }
             }
@@ -59,27 +60,27 @@ public class ParserStAX {
                 Characters characters = event.asCharacters();
 
                 if (Constants.XML_MAN_NAME.equals(currentElement)) {
-                    man.setName(characters.getData());
+                    Objects.requireNonNull(man).setName(characters.getData());
                     continue;
                 }
 
                 if (Constants.XML_MAN_SURNAME.equals(currentElement)) {
-                    man.setSurname(characters.getData());
+                    Objects.requireNonNull(man).setSurname(characters.getData());
                     continue;
                 }
 
                 if (Constants.XML_MAN_AGE.equals(currentElement)) {
-                    man.setAge(Long.parseLong(characters.getData()));
+                    Objects.requireNonNull(man).setAge(Long.parseLong(characters.getData()));
                     continue;
                 }
 
                 if (Constants.XML_MONEY_CURRENCY.equals(currentElement)) {
-                    money.setCurrency(characters.getData());
+                    Objects.requireNonNull(money).setCurrency(characters.getData());
                     continue;
                 }
 
                 if (Constants.XML_MONEY_AMOUNT.equals(currentElement)) {
-                    money.setAmount(Double.parseDouble(characters.getData()));
+                    Objects.requireNonNull(money).setAmount(Double.parseDouble(characters.getData()));
                     continue;
                 }
             }

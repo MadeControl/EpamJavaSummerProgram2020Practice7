@@ -1,9 +1,36 @@
-<tyt:com.epam.rd.java.basic.practice7.Man xmlns:tyt="https://rep.lab.epam.com/api_client/tytykvou-task7">
-  <Name>Danya</Name>
-  <Surname>Polishchuk</Surname>
-  <Age>19</Age>
-  <Money>
-    <Currency>USD</Currency>
-    <Amount>1000.0</Amount>
-  </Money>
-</tyt:com.epam.rd.java.basic.practice7.Man>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<practice7:People xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:practice7="https://rep.lab.epam.com/api_client/tytykvou-task7"
+        xsi:schemaLocation="https://rep.lab.epam.com/api_client/tytykvou-task7 input.xsd">
+  <!--1 to 5 repetitions:-->
+  <Man>
+    <Name>Danya</Name>
+    <Surname>Polishchuk</Surname>
+    <Age>19</Age>
+    <Money>
+      <Currency>USD</Currency>
+      <Amount>1000.0</Amount>
+    </Money>
+  </Man>
+
+  <Man>
+    <Name>Pasha</Name>
+    <Surname>Drovnin</Surname>
+    <Age>18</Age>
+    <Money>
+      <Currency>USD</Currency>
+      <Amount>2000.0</Amount>
+    </Money>
+  </Man>
+
+  <Man>
+    <Name>Ivan</Name>
+    <Surname>Veriovochkin</Surname>
+    <Age>19</Age>
+    <Money>
+      <Currency>USD</Currency>
+      <Amount>3000.0</Amount>
+    </Money>
+  </Man>
+</practice7:People>

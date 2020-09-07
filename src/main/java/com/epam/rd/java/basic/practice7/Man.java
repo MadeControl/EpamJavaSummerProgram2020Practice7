@@ -1,31 +1,11 @@
 package com.epam.rd.java.basic.practice7;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "name",
-    "surname",
-    "age",
-    "money"
-})
-@XmlRootElement(name = "com.epam.rd.java.basic.practice7.Man",
-        namespace = "https://rep.lab.epam.com/api_client/tytykvou-task7")
 public class Man {
 
-    @XmlElement(name = "Name", required = true)
-    protected String name;
-    @XmlElement(name = "Surname", required = true)
-    protected String surname;
-    @XmlElement(name = "Age")
-    protected long age;
-    @XmlElement(name = "Money", required = true)
-    protected Money money;
+    private String name;
+    private String surname;
+    private long age;
+    private Money money;
 
     public String getName() {
         return name;
@@ -59,4 +39,13 @@ public class Man {
         this.money = value;
     }
 
+    @Override
+    public String toString() {
+        return "Man{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", money=" + money +
+                '}';
+    }
 }

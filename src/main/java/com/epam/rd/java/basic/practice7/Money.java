@@ -1,20 +1,9 @@
 package com.epam.rd.java.basic.practice7;
 
-import javax.xml.bind.annotation.*;
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "currency",
-    "amount",
-})
-@XmlRootElement(name = "com.epam.rd.java.basic.practice7.Money",
-        namespace = "https://rep.lab.epam.com/api_client/tytykvou-task7")
 public class Money {
 
-    @XmlElement(name = "Currency", required = true)
-    protected String currency;
-    @XmlElement(name = "Amount")
-    protected double amount;
+    private String currency;
+    private double amount;
 
     public String getCurrency() {
         return currency;
@@ -32,5 +21,12 @@ public class Money {
         this.amount = value;
     }
 
+    @Override
+    public String toString() {
+        return "Money{" +
+                "currency='" + currency + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }
 

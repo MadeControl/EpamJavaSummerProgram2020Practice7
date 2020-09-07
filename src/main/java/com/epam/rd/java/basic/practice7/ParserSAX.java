@@ -2,38 +2,116 @@ package com.epam.rd.java.basic.practice7;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
 
 public class ParserSAX extends DefaultHandler {
 
-    @Override
-    public void startDocument() throws SAXException {
-        super.startDocument();
+    private final String inputXmlFile;
+    private People people;
+    private Man man;
+    private Money money;
+
+    private String currentElement;
+
+    public ParserSAX(String inputXmlFile) {
+        this.inputXmlFile = inputXmlFile;
+    }
+
+    public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
+
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+
+        if (validate) {
+            factory.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+            factory.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+        }
+
+        SAXParser parser = factory.newSAXParser();
+        parser.parse(inputXmlFile, this);
+
     }
 
     @Override
-    public void endDocument() throws SAXException {
-        super.endDocument();
+    public void error(SAXParseException exception) throws SAXException {
+        throw exception;
+    }
+
+    public People getPeople() {
+        return people;
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        super.startElement(uri, localName, qName, attributes);
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
+
+        currentElement = localName;
+
+        if (Constants.XML_PEOPLE.equals(currentElement)) {
+            people = new People();
+            return;
+        }
+
+        if (Constants.XML_MAN.equals(currentElement)) {
+            man = new Man();
+            return;
+        }
+
+        if (Constants.XML_MAN_MONEY.equals(currentElement)) {
+            money = new Money();
+            man.setMoney(money);
+        }
+
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        super.endElement(uri, localName, qName);
+    public void characters(char[] ch, int start, int length) {
+
+        String elementText = new String(ch, start, length).trim();
+
+        if (elementText.isEmpty()) {
+            return;
+        }
+
+        if(Constants.XML_MAN_NAME.equals(currentElement)) {
+            man.setName(elementText);
+            return;
+        }
+
+        if(Constants.XML_MAN_SURNAME.equals(currentElement)) {
+            man.setSurname(elementText);
+            return;
+        }
+
+        if(Constants.XML_MAN_AGE.equals(currentElement)) {
+            man.setAge(Long.parseLong(elementText));
+            return;
+        }
+
+        if (Constants.XML_MONEY_CURRENCY.equals(currentElement)) {
+            money.setCurrency(elementText);
+            return;
+        }
+
+        if (Constants.XML_MONEY_AMOUNT.equals(currentElement)) {
+            money.setAmount(Double.parseDouble(elementText));
+        }
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
-        super.characters(ch, start, length);
+    public void endElement(String uri, String localName, String qName) {
+
+        if (Constants.XML_MAN.equals(localName)) {
+            people.getManList().add(man);
+        }
+
     }
 
-    @Override
-    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-        super.ignorableWhitespace(ch, start, length);
-    }
+
 }
 

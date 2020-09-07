@@ -1,0 +1,9 @@
+<tyt:com.epam.rd.java.basic.practice7.Man xmlns:tyt="https://rep.lab.epam.com/api_client/tytykvou-task7">
+  <Name>Danya</Name>
+  <Surname>Polishchuk</Surname>
+  <Age>19</Age>
+  <Money>
+    <Currency>USD</Currency>
+    <Amount>1000.0</Amount>
+  </Money>
+</tyt:com.epam.rd.java.basic.practice7.Man>

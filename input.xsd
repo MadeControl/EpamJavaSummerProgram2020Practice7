@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="https://rep.lab.epam.com/api_client/tytykvou-task7">
+
+    <xsd:element name="com.epam.rd.java.basic.practice7.Man" >
+        <xsd:complexType>
+            <xsd:sequence>
+                
+                <xsd:element name="Name">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:pattern value="[A-Z][a-z]{1,9}"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <xsd:element name="Surname">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:pattern value="[A-Z][a-z]{1,9}"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                
+                <xsd:element name="Age">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:unsignedInt">
+                            <xsd:minInclusive value="0"/>
+                            <xsd:maxInclusive value="150"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <xsd:element name="Money">
+                    <xsd:complexType>
+                        <xsd:sequence>
+
+                            <xsd:element name="Currency">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="USD"/>
+                                        <xsd:enumeration value="EUR"/>
+                                        <xsd:enumeration value="UAH"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+
+                            <xsd:element name="Amount">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:double">
+                                        <xsd:minInclusive value="0.0"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

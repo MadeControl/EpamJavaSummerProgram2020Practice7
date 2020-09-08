@@ -15,7 +15,4 @@ public class People {
         return manList;
     }
 
-    public void setManList(List<Man> manList) {
-        this.manList = manList;
-    }
 }

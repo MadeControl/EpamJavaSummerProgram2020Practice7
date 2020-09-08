@@ -2,7 +2,6 @@ package com.epam.rd.java.basic.practice7;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,11 +36,6 @@ public class ParserSAX extends DefaultHandler {
         parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         parser.parse(inputXmlFile, this);
 
-    }
-
-    @Override
-    public void error(SAXParseException exception) throws SAXException {
-        throw exception;
     }
 
     public People getPeople() {

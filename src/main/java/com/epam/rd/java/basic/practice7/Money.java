@@ -21,12 +21,5 @@ public class Money {
         this.amount = value;
     }
 
-    @Override
-    public String toString() {
-        return "Money{" +
-                "currency='" + currency + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
 }
 

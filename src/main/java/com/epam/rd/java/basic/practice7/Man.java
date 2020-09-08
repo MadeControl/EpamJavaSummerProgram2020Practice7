@@ -38,14 +38,4 @@ public class Man {
     public void setMoney(Money value) {
         this.money = value;
     }
-
-    @Override
-    public String toString() {
-        return "Man{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", money=" + money +
-                '}';
-    }
 }
